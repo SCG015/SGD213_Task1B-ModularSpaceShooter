@@ -20,8 +20,14 @@ public class EnemyMoveForward : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        Vector2 ForceToAdd = Vector2.down * acceleration * Time.deltaTime;
+        Vector2 forceToAdd = Vector2.down * acceleration * Time.deltaTime;
 
+        ourRigidbody.AddForce(forceToAdd);
+    }
+
+/*    public void Move()
+    {
         ourRigidbody.AddForce(ForceToAdd);
     }
+*/
 }
