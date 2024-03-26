@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+/// <summary>
+/// 
+/// </summary>
 public class SpawnOverTimeScript : MonoBehaviour
 {
 
@@ -17,7 +21,7 @@ public class SpawnOverTimeScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        // Get and store a reference to hte renderer
         ourRenderer = GetComponent<Renderer>();
 
         // Stop our Spawner from being visible!
@@ -27,14 +31,17 @@ public class SpawnOverTimeScript : MonoBehaviour
         // and then repeatedly call it after spawnDelay seconds.
         InvokeRepeating("Spawn", spawnDelay, spawnDelay);
     }
+    /// <summary>
+    /// Spawn will create an enemy object at a random point between the minimum and maximum SpawnRanges
+    /// </summary>
 
     void Spawn()
     {
-
+        // Set the spawnrange values. Calculates the ranges based on the spawner position and renderer size
         float minimumSpawnRange = transform.position.x - ourRenderer.bounds.size.x / 2;
         float maximumSpawnRange = transform.position.x + ourRenderer.bounds.size.x / 2;
 
-        // Randomly pick a point within the spawn object
+        // Randomly pick a point within the spawnRange
         Vector2 spawnPoint = new Vector2(Random.Range(minimumSpawnRange, maximumSpawnRange), transform.position.y);
 
         // Spawn the object at the 'spawnPoint' position

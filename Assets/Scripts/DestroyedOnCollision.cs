@@ -8,6 +8,11 @@ public enum TagListType
     Whitelist
 }
 
+
+/// <summary>
+/// DestroyedOnCollision
+/// .
+/// </summary>
 public class DestroyedOnCollision : MonoBehaviour
 {
 

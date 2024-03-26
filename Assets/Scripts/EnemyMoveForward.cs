@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+/// <summary>
+/// 
+/// </summary>
 public class EnemyMoveForward : MonoBehaviour {
 
     private float acceleration = 75f;
@@ -20,6 +24,7 @@ public class EnemyMoveForward : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        // Add force to our rigidbody to create movement each frame
         Vector2 forceToAdd = Vector2.down * acceleration * Time.deltaTime;
 
         ourRigidbody.AddForce(forceToAdd);

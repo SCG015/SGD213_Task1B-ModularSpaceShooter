@@ -1,24 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+/// <summary>
+/// 
+/// </summary>
 public class ShootingScript : MonoBehaviour
 {
-
+    // reference for our bullet game object to populate
     [SerializeField]
     private GameObject bullet;
 
-    private float lastFiredTime = 0f;
-
+    // Value for Time between firing shots
     [SerializeField]
     private float fireDelay = 1f;
-
+    private float lastFiredTime = 0f;
     private float bulletOffset = 2f;
 
+    // Use this for initialization
     void Start()
     {
         // Do some math to perfectly spawn bullets in front of us
-        bulletOffset = GetComponent<Renderer>().bounds.size.y / 2 // Half of our size
-            + bullet.GetComponent<Renderer>().bounds.size.y / 2; // Plus half of the bullet size
+        // Half of our size plus half of the bullet size
+        bulletOffset = GetComponent<Renderer>().bounds.size.y / 2
+            + bullet.GetComponent<Renderer>().bounds.size.y / 2;
     }
 
     // Update is called once per frame
@@ -42,28 +47,23 @@ public class ShootingScript : MonoBehaviour
         }
     }*/
 
+    /// <summary>
+    /// Shoot method to spawn a bullet from the middle of our spaceship object.
+    /// fireDelay has been implemetned to prevent player from spamming the bullet
+    /// </summary>
     public void Shoot()
     {
         float currentTime = Time.time;
 
-        // Have a delay so we don't shoot too many bullets
+        // If the time since last run is greater than our delay value
         if (currentTime - lastFiredTime > fireDelay)
         {
+            // Spawn bullet at the bulletOffset calculated previously
             Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y + bulletOffset);
-
+            //
             Instantiate(bullet, spawnPosition, transform.rotation);
-
+            // Set lastFiredTime to the current time value to be compared for the next run
             lastFiredTime = currentTime;
         }
     }
-    /// <summary>
-    /// SampleMethod is a sample of how to use abstraction by
-    /// specification. It converts a provided integer to a float.
-    /// </summary>
-    /// <param name="number">any integer</param>
-    /// <returns>the number parameter as a float</returns>
-    public float SampleMethod(int number) {
-        return number;
-    }
-
 }

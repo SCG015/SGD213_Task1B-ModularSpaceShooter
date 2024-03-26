@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+/// <summary>
+/// 
+/// </summary>
 public class PlayerMovementScript : MonoBehaviour {
             // SerializeField exposes this value to the Editor, but not to other Scripts!
             // It is "pseudo public"
@@ -12,9 +16,10 @@ public class PlayerMovementScript : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        // Get OurRigidbodyComponent once at the start of the game and store a reference to it
-        // This means that we don't need to call GetComponent more than once! This makes our game faster. (GetComponent is SLOW)
+        // Get and store a reference to OurRigidbodyComponent
         ourRigidbody = GetComponent<Rigidbody2D>(); }
+
+
     // Update is called once per frame
     /*
     void Update() {
@@ -24,8 +29,15 @@ public class PlayerMovementScript : MonoBehaviour {
 
             //print(HorizontalInput);
         } } */
+
+
+    /// <summary>
+    /// HorizontalMovement handles the input from the player and translates it to movement for the object
+    /// </summary>
+    /// <param name="horizontalInput"> The float value +/- X value for horizontal movement </param>
     public void HorizontalMovement (float horizontalInput)
-    {
+    {       
+            // Add force to rigidbody in the direction speed of horizontalInput and playerSpeed
             Vector2 forceToAdd = Vector2.right * horizontalInput * playerSpeed * Time.deltaTime;
             ourRigidbody.AddForce(forceToAdd);
     }
