@@ -1,44 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Specialized;
 
 
 /// <summary>
-/// 
+/// Handles the movement of the player
 /// </summary>
-public class PlayerMovementScript : MonoBehaviour {
-            // SerializeField exposes this value to the Editor, but not to other Scripts!
-            // It is "pseudo public"
-            // HorizontalPlayerAcceleration indicates how fast we accelerate Horizontally
-            [SerializeField]
-            private float playerSpeed = 5000f;
+public class PlayerMovementScript : MonoBehaviour, IEngine
+{
+    // Indicates how fast we accelerate
+    [SerializeField]
+    private float playerSpeed = 5000f;
 
-            private Rigidbody2D ourRigidbody;
+    private Rigidbody2D ourRigidbody;
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         // Get and store a reference to OurRigidbodyComponent
-        ourRigidbody = GetComponent<Rigidbody2D>(); }
-
-
-    // Update is called once per frame
-    /*
-    void Update() {
-        float HorizontalInput = Input.GetAxis("Horizontal");
-
-        if (HorizontalInput != 0.0f) {
-
-            //print(HorizontalInput);
-        } } */
-
+        ourRigidbody = GetComponent<Rigidbody2D>();
+    }
 
     /// <summary>
-    /// HorizontalMovement handles the input from the player and translates it to movement for the object
+    /// Uses the IEngine interface and applies
+    /// force to the rigidbody in the value of direction
     /// </summary>
-    /// <param name="horizontalInput"> The float value +/- X value for horizontal movement </param>
-    public void HorizontalMovement (float horizontalInput)
-    {       
-            // Add force to rigidbody in the direction speed of horizontalInput and playerSpeed
-            Vector2 forceToAdd = Vector2.right * horizontalInput * playerSpeed * Time.deltaTime;
-            ourRigidbody.AddForce(forceToAdd);
+    /// <param name="direction">Direction of movement suplied by player input</param>
+    void IEngine.Move(Vector3 direction)
+
+    {
+        // Add force to rigidbody in the direction speed of horizontalInput and playerSpeed
+        Vector2 forceToAdd = direction * playerSpeed * Time.deltaTime;
+        ourRigidbody.AddForce(forceToAdd);
     }
 }

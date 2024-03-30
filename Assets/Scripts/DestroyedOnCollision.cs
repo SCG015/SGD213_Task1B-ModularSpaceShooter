@@ -10,8 +10,8 @@ public enum TagListType
 
 
 /// <summary>
-/// DestroyedOnCollision
-/// .
+/// Used to handle the collision events that occur
+/// between whitelist and blacklist objects
 /// </summary>
 public class DestroyedOnCollision : MonoBehaviour
 {
@@ -24,6 +24,11 @@ public class DestroyedOnCollision : MonoBehaviour
     [SerializeField]
     private List<string> tags;
 
+    /// <summary>
+    /// Checks the objects tags for blacklist or whitelist value
+    /// then performs the action when compared agaionst its own value
+    /// </summary>
+    /// <param name="other">The other object colliding with the component</param>
     void OnTriggerEnter2D(Collider2D other)
     {
         bool tagInList = tags.Contains(other.gameObject.tag);

@@ -3,11 +3,10 @@ using System.Collections;
 
 
 /// <summary>
-/// 
+/// Handles the when and where of spawning of objects into the game
 /// </summary>
 public class SpawnOverTimeScript : MonoBehaviour
 {
-
     // Object to spawn
     [SerializeField]
     private GameObject spawnObject;
@@ -21,7 +20,7 @@ public class SpawnOverTimeScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        // Get and store a reference to hte renderer
+        // Get and store a reference to the renderer
         ourRenderer = GetComponent<Renderer>();
 
         // Stop our Spawner from being visible!
@@ -31,10 +30,11 @@ public class SpawnOverTimeScript : MonoBehaviour
         // and then repeatedly call it after spawnDelay seconds.
         InvokeRepeating("Spawn", spawnDelay, spawnDelay);
     }
+
     /// <summary>
     /// Spawn will create an enemy object at a random point between the minimum and maximum SpawnRanges
+    /// It finds those values by taking the value of the bounds, halving it then +/- each half to the transform
     /// </summary>
-
     void Spawn()
     {
         // Set the spawnrange values. Calculates the ranges based on the spawner position and renderer size

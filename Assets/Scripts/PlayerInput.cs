@@ -6,34 +6,37 @@ using UnityEngine;
 
 
 /// <summary>
-/// 
+/// PlayerInput handles all of the input from the player, 
+/// and passes the input information to the components
 /// </summary>
 public class PlayerInput : MonoBehaviour
 {
-
-    private PlayerMovementScript playerMovementScript;
     private ShootingScript shootingScript;
+    private IEngine engine;
     
     // Start is called before the first frame update
     void Start()
     {
-        // Get references for Player Movement and Shooting script components
-        playerMovementScript = GetComponent<PlayerMovementScript>();
+        // Get references for Shooting script
         shootingScript = GetComponent<ShootingScript>();
+        // and our IEngine components
+        engine = GetComponent<IEngine>();
+ 
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Set the input value from Horizontal input in 
-        float horizontalInput = Input.GetAxis("Horizontal");
 
-        // If input is detected that is greater than the deadzone of 0
-        if (horizontalInput != 0.0f)
+        // As long as the engine is populated
+        if (engine != null)
         {
-            // Send horizontal movement input to the playerMovementScript
-            playerMovementScript.HorizontalMovement(horizontalInput - + 0 );
+            // Set the input value from Horizontal input
+            float input = Input.GetAxis("Horizontal");
+            // Send horizontal movement input to 
+            engine.Move(Vector3.right * input);
         }
+    
         // When Fire1 is pressed
         if (Input.GetButton("Fire1"))
         {

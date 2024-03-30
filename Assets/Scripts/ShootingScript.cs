@@ -3,18 +3,21 @@ using System.Collections;
 
 
 /// <summary>
-/// 
+/// Handles the shooting function 
 /// </summary>
 public class ShootingScript : MonoBehaviour
 {
-    // reference for our bullet game object to populate
+    // Reference for our bullet game object to populate
     [SerializeField]
     private GameObject bullet;
 
     // Value for Time between firing shots
     [SerializeField]
     private float fireDelay = 1f;
+
+    // Value since last time fired
     private float lastFiredTime = 0f;
+    // Default value for bulletOffset
     private float bulletOffset = 2f;
 
     // Use this for initialization
@@ -26,33 +29,13 @@ public class ShootingScript : MonoBehaviour
             + bullet.GetComponent<Renderer>().bounds.size.y / 2;
     }
 
-    // Update is called once per frame
-    /*void Update()
-    {
-        if (Input.GetButton("Fire1"))
-        {
-            float CurrentTime = Time.time;
-
-            // Have a delay so we don't shoot too many bullets
-            if (CurrentTime - lastFiredTime > fireDelay)
-            {
-                Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y + bulletOffset);
-
-                Instantiate(bullet, spawnPosition, transform.rotation);
-
-                lastFiredTime = CurrentTime;
-            }
-
-            //print("Shoot!");
-        }
-    }*/
-
     /// <summary>
     /// Shoot method to spawn a bullet from the middle of our spaceship object.
     /// fireDelay has been implemetned to prevent player from spamming the bullet
     /// </summary>
     public void Shoot()
     {
+        // Store value of the current time
         float currentTime = Time.time;
 
         // If the time since last run is greater than our delay value

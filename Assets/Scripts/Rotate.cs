@@ -3,7 +3,8 @@ using System.Collections;
 
 
 /// <summary>
-/// 
+/// We want our objects to rotate at random speeds
+/// Provides some visual variance to the player
 /// </summary>
 public class Rotate : MonoBehaviour
 {
